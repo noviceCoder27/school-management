@@ -7,7 +7,8 @@ const TeacherSchema = new mongoose.Schema({
     dateOfBirth: {type: String, required: true},
     contactDetails: {type: String, required: true},
     salary: {type: Number, required: true},
-    assignedClass: { type: mongoose.Schema.Types.ObjectId, ref: 'Class' }
+    assignedClass: { type: mongoose.Schema.Types.ObjectId, ref: 'Class' },
+    className: {type: String,required: true}
 },{timestamps: true});
 
 const Teacher = mongoose.model('Teacher', TeacherSchema);

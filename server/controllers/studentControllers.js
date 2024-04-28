@@ -19,14 +19,14 @@ export const getStudentDetails = async(req,res) => {
 }
 
 export const addStudent = async(req,res) => {
-    const {name,gender,dateOfBirth,contactDetails,salary,className} = req.body;
+    const {name,gender,dob:dateOfBirth,contact:contactDetails,fees,className} = req.body;
     const classDetails = await Class.findOne({className});
     if(classDetails) {
         const {_id,students} = classDetails;
         if(students.length < 10) {
-            const student = await Student.create({name,gender,dateOfBirth,salary,contactDetails,assignedClass: _id});
-            await Class.findByIdAndUpdate(_id, {$push: {students: student._id}});
-            res.send({msg: "Student assigned successfully"});
+            const student = await Student.create({name,gender,dateOfBirth,fees,contactDetails,assignedClass: _id,className});
+            await Class.findByIdAndUpdate(_id, {$push: {students: student._id}, $inc: {studentFees: fees}});
+            res.status(201).json(student);
         } else {
             res.status(400).json({msg: "Class limit reached"});
         } 
@@ -48,14 +48,15 @@ export const deleteStudent = async(req,res) => {
         }
     }
     classDetails.students = updatedData;
+    classDetails.studentFees -= student.fees;
     classDetails.save();
-    res.status(201).json({msg: "Succesfully deleted student"});
+    res.status(201).json(student);
 }
 
 export const updateStudentDetails = async(req,res) => {
-    const {name,gender,contactDetails,feesPaid} =req.body;
+    const {name,gender,contactDetails,fees} =req.body;
     const {id: _id} = req.params;
-    await Class.findByIdAndUpdate(_id,{name,gender,contactDetails,feesPaid});
+    await Class.findByIdAndUpdate(_id,{name,gender,contactDetails,fees});
     res.status(201).json({msg: "Successfully updated student details"});
 }
 

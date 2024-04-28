@@ -1,6 +1,10 @@
 import Class from '../models/classModel.js';
 import Teacher from './../models/teacherModel.js'
 
+export const getAllTeachers = async(req,res) => {
+    const teachers = await Teacher.find({});
+    res.status(200).json(teachers);
+}
 
 export const getTeacherDetails = async(req,res) => {
     const {id} = req.params;
@@ -9,12 +13,12 @@ export const getTeacherDetails = async(req,res) => {
 }
 
 export const addTeacher = async(req,res) => {
-    const {name,gender,dateOfBirth,contactDetails,salary,className} = req.body;
+    const {name,gender,dob:dateOfBirth,contact:contactDetails,salary,className} = req.body;
     const classDetails = await Class.findOne({className});
     if(classDetails) {
         const {_id,teachers} = classDetails;
         if(teachers.length < 3) {
-            const teacher = await Teacher.create({name,gender,dateOfBirth,salary,contactDetails,assignedClass: _id});
+            const teacher = await Teacher.create({name,gender,dateOfBirth,salary,contactDetails,assignedClass: _id,className});
             await Class.findByIdAndUpdate(_id, {$push: {teachers: teacher._id}});
             res.send({msg: "Teacher assigned successfully"});
         } else {
