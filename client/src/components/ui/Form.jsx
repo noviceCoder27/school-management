@@ -11,6 +11,13 @@ const Form = ({details,setOpenPopup}) => {
     const [info,setInfo] = useState({name: "",fees:0,dob: "",className: "",gender:"M",contact: "",salary: 0})
     const {classNames,setTeachers,setClasses,setStudents,setToUpdate} = useDataContext();
     const classOptions = classNames?.map((name,index) => <option key = {index}>{name}</option>)
+
+    const checkPhone = (phone) => {
+        if(phone.length !== 13) {
+            return false;
+        }
+        return true;
+    }
     const setClass = async () => {
         try {
             const res = await addClass(classDetails);
@@ -21,6 +28,9 @@ const Form = ({details,setOpenPopup}) => {
         }
     }
     const setStudent = async() => {
+        if(!checkPhone(info.contact)) {
+            return;
+        }
         try {
             const res = await addStudent(info);
             setStudents(prev => prev.length ? [...prev,res]: [res])
@@ -32,6 +42,9 @@ const Form = ({details,setOpenPopup}) => {
     }
 
     const setTeacher = async() => {
+        if(!checkPhone(info.contact)) {
+            return;
+        }
         try {
             const res = await addTeacher(info);
             setTeachers(prev => prev.length ? [...prev,res]: [res])
