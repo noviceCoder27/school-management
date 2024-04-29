@@ -65,16 +65,16 @@ const Form = ({details,setOpenPopup}) => {
                 {details.isClass ? 
                 <>
                     <div className = "flex gap-2">
-                        <label htmlFor="name" className = "flex-1">Class Name:</label>
+                        <label htmlFor="name" className = "w-[30%]">Class Name:</label>
                         <input id = "name" type="text" placeholder = "Enter class name" className= "flex-grow border-2" onChange = {(e) => setClassDetails(prev => ({...prev,name: e.target.value}))}/>
                     </div>
                     <div className = "flex gap-2">
-                        <label htmlFor="year" className = "flex-1">Year:</label>
+                        <label htmlFor="year" className = "w-[30%]">Year:</label>
                         <input id = "year" type="text" placeholder = "Enter year" className= "flex-grow border-2" onChange = {(e) => setClassDetails(prev => ({...prev,year:e.target.value}))}/>
                     </div>
                     <div className = "flex gap-2">
-                        <label htmlFor="month">Month:</label>
-                        <select id = "month" type="text" value = {classDetails.month} className= "w-32 ml-[68px] border-2 " onChange = {(e) => setClassDetails(prev => ({...prev,month: e.target.value}))}>
+                        <label htmlFor="month" className = "w-[30%]">Month:</label>
+                        <select id = "month" type="text" value = {classDetails.month} className= "w-32 border-2 " onChange = {(e) => setClassDetails(prev => ({...prev,month: e.target.value}))}>
                             <option value="January">January</option>
                             <option value="February">February</option>
                             <option value="March">March</option>
@@ -92,18 +92,18 @@ const Form = ({details,setOpenPopup}) => {
                 </>:
                 <>
                     <div className = "flex gap-2">
-                        <label htmlFor="name" className = "flex-1">{details.name.label}</label>
+                        <label htmlFor="name" className = "w-[30%]">{details.name.label}</label>
                         <input id = "name" type="text" placeholder = {details.name.placeholder} className= "flex-grow border-2" value = {info.name} onChange={(e) => setInfo(prev => ({...prev,name:e.target.value}))}/>
                     </div>
                     <div className = "flex gap-2">
-                        <label htmlFor="gender">{details.gender.label}</label>
-                        <select id = "gender" type="text" className = "w-12 ml-16 border-2" value = {info.gender} onChange={(e) => setInfo(prev => ({...prev,gender:e.target.value}))}>
+                        <label htmlFor="gender" className= "w-[30%]">{details.gender.label}</label>
+                        <select id = "gender" type="text" className = "w-12 border-2" value = {info.gender} onChange={(e) => setInfo(prev => ({...prev,gender:e.target.value}))}>
                             <option value = "M">M</option>
                             <option value = "F">F</option>
                         </select>
                     </div>
                     <div className = "flex gap-2">
-                        <label htmlFor="money" className = "flex-1">
+                        <label htmlFor="money" className = "w-[30%]">
                             {details.isStudent ? details.fees.label: details.salary.label}
                             </label>
                         <input id = "money" type="text" placeholder = {details.isStudent ? details.fees.placeholder: details.salary.placeholder} className= "flex-grow border-2" value = {details.isStudent ? info.fees: info.salary} onChange={(e) => {
@@ -115,18 +115,18 @@ const Form = ({details,setOpenPopup}) => {
                         }}/>
                     </div>
                     <div className = "flex gap-2">
-                        <label htmlFor="class">{details.assignedClass.label}</label>
-                        <select className = "ml-20 border-2" value = {info.className} onChange = {(e) => setInfo(prev => ({...prev,className:e.target.value}))}>
+                        <label htmlFor="class" className= "w-[30%]">{details.assignedClass.label}</label>
+                        <select className = "border-2" value = {info.className} onChange = {(e) => setInfo(prev => ({...prev,className:e.target.value}))}>
                             <option value="select-class">Select Class</option>
                             {classOptions}
                         </select>
                     </div>
                     <div className = "flex gap-2">
-                        <label htmlFor="dob" className = "flex-1">{details.dateOfBirth.label}</label>
+                        <label htmlFor="dob" className = "w-[30%]">{details.dateOfBirth.label}</label>
                         <input id = "dob" type="text" placeholder = {details.dateOfBirth.placeholder} className= "flex-grow border-2" value = {info.dob} onChange={(e) => setInfo(prev => ({...prev,dob:e.target.value}))}/>
                     </div>
                     <div className = "flex gap-2">
-                        <label htmlFor="contact" className = "flex-1">{details.contact.label}</label>
+                        <label htmlFor="contact" className = "w-[30%]">{details.contact.label}</label>
                         <input id = "contact" type="text" placeholder = {details.contact.placeholder} className= "flex-grow border-2" value = {info.contact} onChange={(e) => setInfo(prev => ({...prev,contact:e.target.value}))}/>
                     </div>
                 </>}
