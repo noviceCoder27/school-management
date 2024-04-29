@@ -2,7 +2,18 @@ import Class from '../models/classModel.js';
 import Teacher from './../models/teacherModel.js'
 
 export const getAllTeachers = async(req,res) => {
-    const teachers = await Teacher.find({});
+    const {search} = req.query;
+    let teachers;
+    if(search) {
+        teachers = await Teacher.find({
+            name: {
+                $regex: search,
+                $options: 'i'
+            }
+        });
+    } else {
+        teachers = await Teacher.find({});
+    }
     res.status(200).json(teachers);
 }
 

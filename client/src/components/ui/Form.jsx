@@ -3,6 +3,7 @@ import { addClass } from "../../apis/classes";
 import { addStudent } from "../../apis/students";
 import { addTeacher } from "../../apis/teachers";
 import { useDataContext } from "../../context/DataContext";
+import { toastError } from "../../utils/toastMessage";
 
 
 
@@ -24,11 +25,12 @@ const Form = ({details,setOpenPopup}) => {
             setClasses(prev => prev.length ? [...prev,res]: [res]);
             setOpenPopup(false);
         } catch(err) {
-            console.log(err);
+            toastError("Error adding class")
         }
     }
     const setStudent = async() => {
         if(!checkPhone(info.contact)) {
+            toastError("Incorrect phone number");
             return;
         }
         try {
@@ -37,12 +39,13 @@ const Form = ({details,setOpenPopup}) => {
             setOpenPopup(false);
             setToUpdate(prev => !prev);
         } catch(err) {
-            console.log(err);
+            toastError("Error adding student")
         }
     }
 
     const setTeacher = async() => {
         if(!checkPhone(info.contact)) {
+            toastError("Incorrect phone number")
             return;
         }
         try {
@@ -51,7 +54,7 @@ const Form = ({details,setOpenPopup}) => {
             setOpenPopup(false);
             setToUpdate(prev => !prev)
         } catch(err) {
-            console.log(err);
+            toastError("Error adding teacher")
         }
     }
     

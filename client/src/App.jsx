@@ -6,13 +6,13 @@ import Teachers from './pages/Teachers'
 import './App.css'
 import { DataContextProvider } from "./context/DataContext"
 import Class from "./pages/Class"
+import { Toaster } from "react-hot-toast"
 
 function App() {
-  
-
   return (
     <DataContextProvider>
       <Router>
+          <Toaster />
           <Routes>
             <Route path = "/" element = {<Dashboard />} />
             <Route path = "/classes" element = {<Classes />} />

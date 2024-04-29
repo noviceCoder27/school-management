@@ -9,6 +9,7 @@ import { convertToMonth } from "../utils/convertMonth";
 import { getTeacherDetails } from "../apis/teachers";
 import { getStudentDetails } from "../apis/students";
 import PieGraph from "../components/PieGraph";
+import { toastError } from "../utils/toastMessage";
 
 const Class = () => {
     const [classDetails,setClassDetails] = useState(null);
@@ -48,7 +49,7 @@ const Class = () => {
                 setCounts({male: maleCount, female: femaleCount});
     
             } catch(err) {
-                console.log(err);
+                toastError("Error fetching class details");
             }
         }
         fetchDetails();

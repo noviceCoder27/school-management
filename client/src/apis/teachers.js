@@ -6,16 +6,16 @@ export const addTeacher = async (studentDetails) => {
         const response = await axios.post(`${backend_url}/teachers/add`,studentDetails);
         return response.data;
     } catch(err) {
-        console.log(err);
+        throw new Error(err);
     }
 }
 
-export const getTeachers = async() => {
+export const getTeachers = async(search) => {
     try {
-        const response = await axios.get(`${backend_url}/teachers`);
+        const response = await axios.get(`${backend_url}/teachers?search=${search}`);
         return response.data;
     } catch(err) {
-        console.log(err);
+        throw new Error(err);
     }
 }
 
@@ -25,7 +25,7 @@ export const getTeacherDetails = async(id) => {
             const response = await axios.get(`${backend_url}/teachers/${id}`);
             return response.data;
         } catch(err) {
-            console.log(err);
+            throw new Error(err);
         }
     }
 }
@@ -36,7 +36,7 @@ export const deleteTeacher = async(id) => {
             const response = await axios.delete(`${backend_url}/teachers/${id}`);
             return response.data;
         } catch(err) {
-            console.log(err);
+            throw new Error(err);
         }
     }
 }

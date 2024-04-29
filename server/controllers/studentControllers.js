@@ -2,8 +2,19 @@ import Class from "../models/classModel.js";
 import Student from "../models/studentModel.js"
 
 export const getAllStudents = async(req,res) => {
-    const students = await Student.find({});
-    res.status(200).json(students); 
+    const {search} = req.query;
+    let students;
+    if(search) {
+        students = await Student.find({
+            name: {
+                $regex: search,
+                $options: 'i'
+            }
+        });
+    } else {
+        students = await Student.find({});
+    }
+    res.status(200).json(students);
 }
 
 export const getStudentCount = async(req,res) => {

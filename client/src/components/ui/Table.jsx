@@ -5,6 +5,7 @@ import { deleteTeacher } from "../../apis/teachers";
 import TeacherItem from "../TeacherItem";
 import StudentItem from "../StudentItem";
 import ClassItem from "../ClassItem";
+import { toastError } from "../../utils/toastMessage";
 
 const Table = ({data,student,isClass,setOpenPopup}) => {
     const {classes,setClasses,students,setStudents,teachers,setTeachers,setToUpdate} = useDataContext();
@@ -15,7 +16,7 @@ const Table = ({data,student,isClass,setOpenPopup}) => {
             setClasses(updatedClasses);
             setToUpdate(prev => !prev);
         } catch(err) {
-            console.log(err);
+            toastError("Error deleting class");
         }
     }
     const removeStudent = async(id) => {
@@ -25,7 +26,7 @@ const Table = ({data,student,isClass,setOpenPopup}) => {
             setStudents(updatedStudents);
             setToUpdate(prev => !prev);
         } catch(err) {
-            console.log(err);
+            toastError("Error deleting student")
         }
     }
     const removeTeacher = async(id) => {
@@ -35,7 +36,7 @@ const Table = ({data,student,isClass,setOpenPopup}) => {
             setTeachers(updatedTeachers);
             setToUpdate(prev => !prev);
         } catch(err) {
-            console.log(err);
+            toastError("Error deleting teacher")
         }
     }
     

@@ -6,6 +6,7 @@ import Navbar from './../components/Navbar';
 import { useEffect, useState } from "react";
 import { getAllData, getIncomeDetails } from "../apis/classes";
 import { FaRupeeSign  } from "react-icons/fa";
+import { toastError } from "../utils/toastMessage";
 
 const Dashboard = () => {
   const [counts,setCounts] = useState({classCount: 0, teacherCount: 0,studentCount: 0 });
@@ -20,7 +21,7 @@ const Dashboard = () => {
         setCounts({classCount: res.classCount, teacherCount:res.teacherCount,studentCount: res.studentCount});
         setYears(res.years); 
       } catch(err) {
-        console.log(err);
+        toastError("Error fetching data");
       }
     }
     fetchData()
@@ -31,7 +32,7 @@ const Dashboard = () => {
         const res = await getIncomeDetails(timePeriod.year,currentTime.year,currentTime.month);
         setIncomeDetails({expense: res?.expense,income: res?.income})
       } catch(err) {
-        console.log(err);
+        toastError("Error fetching income details");
       }
     }
     fetchData()

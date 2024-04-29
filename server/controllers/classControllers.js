@@ -14,8 +14,19 @@ export const getAllData = async(req,res) => {
 }
 
 export const getAllClasses = async(req,res) => {
-    const classes = await Class.find({});
-    res.status(200).json(classes)
+    const {search} = req.query;
+    let classes;
+    if(search) {
+        classes = await Class.find({
+            className: {
+                $regex: search,
+                $options: 'i'
+            }
+        });
+    } else {
+        classes = await Class.find({});
+    }
+    res.status(200).json(classes);
 }
 
 export const getClassDetails = async(req,res) => {

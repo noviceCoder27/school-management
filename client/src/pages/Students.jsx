@@ -4,6 +4,7 @@ import Popup from "../components/ui/Popup"
 import Table from "../components/ui/Table"
 import Navbar from "../components/Navbar";
 import { useDataContext } from "../context/DataContext";
+import Input from "../components/ui/Input";
 
 
 
@@ -26,7 +27,10 @@ const Students = () => {
       <div className = "relative flex flex-col min-h-[100vh] bg-[#fbf6f2] w-full">
         <h3 className = "text-[3rem] p-5 font-semibold">Students</h3>
         <section className = "p-5">
-          <button className = "p-3 mb-4 font-semibold text-white rounded-lg bg-sky-400 float-end" onClick={() => setOpenPopup(true)}>Add Student</button>
+          <div className="flex">
+            <Input />
+            <button className = "p-3 mb-4 ml-auto font-semibold text-white rounded-lg bg-sky-400 float-end" onClick={() => setOpenPopup(true)}>Add Student</button>
+          </div>
           <Table data = {students} student = {true} isClass = {false}/>
         </section>
         <Popup details = {details} openPopup = {openPopup} setOpenPopup = {setOpenPopup}/>
