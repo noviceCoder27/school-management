@@ -9,8 +9,9 @@ export const getAllData = async(req,res) => {
     const students = await Student.find({});
     const teachers = await Teacher.find({});
     const years = classes.map(classObj => classObj.year);
+    const yearsUnique = [...new Set(years)]
     const months = classes.map(classObj => classObj.month);
-    res.status(200).json({classCount: classes.length,studentCount:students.length,teacherCount: teachers.length,years,months});
+    res.status(200).json({classCount: classes.length,studentCount:students.length,teacherCount: teachers.length,years:yearsUnique,months});
 }
 
 export const getAllClasses = async(req,res) => {
